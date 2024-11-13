@@ -131,8 +131,8 @@ h3 {
   color: var(--blue);
 }
 
-/* MERCHANT + ITEM CARDS */
-.merchant, .item {
+/* MERCHANT + ITEM CARDS + COUPONS*/
+.merchant, .item, .coupon {
   align-items: center;
   background-color: #fff;
   border-radius: 8px;
@@ -145,25 +145,28 @@ h3 {
 }
 
 .merchant:hover,
-.item:hover {
+.item:hover,
+.coupon:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   transform: translateY(-5px);
 }
 
-.items-view {
+.items-view, .coupons-view {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.item {
+.item, .coupon {
   flex-direction: column;
   text-align: center;
   width: 30%;
 }
 
 .item p,
-.item h2 {
+.item h2,
+.coupon p,
+.coupon h2 {
   margin: 5px;
 } 
 
@@ -195,6 +198,8 @@ h3 {
 .merchant-options > .delete-merchant:hover {
   color: var(--red);
 }
+
+
 
 /* STATUS MESSAGES */
 .success {
