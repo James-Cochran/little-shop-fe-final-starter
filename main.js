@@ -143,7 +143,7 @@ function showMerchantsView() {
   addRemoveActiveNav(merchantsNavButton, itemsNavButton)
   addNewButton.dataset.state = 'merchant'
   show([merchantsView, addNewButton])
-  hide([itemsView])
+  hide([itemsView, ])
   displayMerchants(merchants)
 }
 
@@ -163,6 +163,12 @@ function showMerchantItemsView(id, items) {
   addRemoveActiveNav(itemsNavButton, merchantsNavButton)
   addNewButton.dataset.state = 'item'
   displayItems(items)
+}
+
+function showCouponsView(merchantId) {
+  showingText.innerText = `All Coupons for Merchant #${merchantId}`
+  hide([addNewButton])
+  show([couponsView])
 }
 
 // Functions that add data to the DOM
@@ -234,11 +240,12 @@ function displayMerchantItems(event) {
 
 function getMerchantCoupons(event) {
   let merchantId = event.target.closest("article").id.split('-')[1]
-  console.log("Merchant ID:", merchantId)
+  console.log("Merchant Id:", merchantId)
 
-  fetchData(`merchants/${merchantId}`)
+  fetchData(`merchants/${merchantId}/coupons`)
   .then(couponData => {
     console.log("Coupon data from fetch:", couponData)
+    showCouponsView(merchantId)
     displayMerchantCoupons(couponData);
   })
 }
@@ -247,9 +254,17 @@ function displayMerchantCoupons(coupons) {
   show([couponsView])
   hide([merchantsView, itemsView])
 
-  couponsView.innerHTML = `
-    <p>Coupon data will go here.</p>
-  `
+  couponsView.innerHTML = "";
+  coupons.data.forEach( (coupon) => {
+    couponsView.innerHTML += `
+    <article class="coupon" id="coupon-${coupon.id}">
+      <h3>${coupon.attributes.name}</h3>
+      <p>Code: ${coupon.attributes.code}</p>
+      <p>Value: $${coupon.attributes.value}</p>
+      <p>Status: ${coupon.attributes.active ? 'Active' : 'Inactive'}</p>
+    </article>
+    `
+  })
 }
 
 //Helper Functions
