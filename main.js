@@ -260,8 +260,11 @@ function displayMerchantCoupons(coupons) {
     <article class="coupon" id="coupon-${coupon.id}">
       <h3>${coupon.attributes.name}</h3>
       <p>Code: ${coupon.attributes.code}</p>
-      <p>Value: $${coupon.attributes.value}</p>
+      <p>Value: ${coupon.attributes.value}</p>
       <p>Status: ${coupon.attributes.active ? 'Active' : 'Inactive'}</p>
+      <p>Dollar Off: $${coupon.attributes.dollar_off}</p>
+      <p>Percent Off: ${coupon.attributes.percent_off}%</p>
+      <p>Times Used: ${coupon.attributes.times_used}</p>
     </article>
     `
   })
